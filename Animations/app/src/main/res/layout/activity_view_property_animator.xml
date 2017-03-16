@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ViewPropertyAnimatorActivity">
+
+    <ImageView
+        android:id="@+id/imageViewVP"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ball" />
+
+    <TextView
+        android:id="@+id/textViewVPFade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fade"
+        android:textSize="@dimen/_14sdp"
+        android:layout_below="@+id/textViewVPRotate"
+        android:layout_toLeftOf="@+id/textViewVPRotate"
+        android:layout_toStartOf="@+id/textViewVPRotate" />
+
+    <TextView
+        android:id="@+id/textViewVPRotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rotate"
+        android:textSize="@dimen/_14sdp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewVPUnfade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unfade"
+        android:textSize="@dimen/_14sdp"
+        android:layout_below="@+id/textViewVPRotate"
+        android:layout_toRightOf="@+id/textViewVPRotate"
+        android:layout_toEndOf="@+id/textViewVPRotate" />
+
+    <TextView
+        android:id="@+id/textViewVPUnrotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Unrotate"
+        android:textSize="@dimen/_14sdp"
+        android:layout_below="@+id/textViewVPFade"
+        android:layout_toRightOf="@+id/textViewVPFade"
+        android:layout_toEndOf="@+id/textViewVPFade" />
+
+</RelativeLayout>
