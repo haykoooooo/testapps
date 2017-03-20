@@ -1,7 +1,7 @@
 package com.haykabelyan.imagestosdcard;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -11,56 +11,57 @@ import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    ImageView[] images;
+
+    int[] images;
     CheckBox[] checkBoxes;
     Bitmap[] bitmaps;
     Button button;
-    Bitmap bitmap;
+    ArrayList<Bitmap> bitmap;
+    ArrayList<Integer> index;
     File myDir;
     String fname;
     File file;
-    ImageIndex imageIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        images = new ImageView[26];
+        images = new int[26];
         checkBoxes = new CheckBox[26];
 
-        images[0] = (ImageView) findViewById(R.id.a);
-        images[1] = (ImageView) findViewById(R.id.b);
-        images[2] = (ImageView) findViewById(R.id.c);
-        images[3] = (ImageView) findViewById(R.id.d);
-        images[4] = (ImageView) findViewById(R.id.e);
-        images[5] = (ImageView) findViewById(R.id.f);
-        images[6] = (ImageView) findViewById(R.id.g);
-        images[7] = (ImageView) findViewById(R.id.h);
-        images[8] = (ImageView) findViewById(R.id.i);
-        images[9] = (ImageView) findViewById(R.id.j);
-        images[10] = (ImageView) findViewById(R.id.k);
-        images[11] = (ImageView) findViewById(R.id.l);
-        images[12] = (ImageView) findViewById(R.id.m);
-        images[13] = (ImageView) findViewById(R.id.n);
-        images[14] = (ImageView) findViewById(R.id.o);
-        images[15] = (ImageView) findViewById(R.id.p);
-        images[16] = (ImageView) findViewById(R.id.q);
-        images[17] = (ImageView) findViewById(R.id.r);
-        images[18] = (ImageView) findViewById(R.id.s);
-        images[19] = (ImageView) findViewById(R.id.t);
-        images[20] = (ImageView) findViewById(R.id.u);
-        images[21] = (ImageView) findViewById(R.id.v);
-        images[22] = (ImageView) findViewById(R.id.w);
-        images[23] = (ImageView) findViewById(R.id.x);
-        images[24] = (ImageView) findViewById(R.id.y);
-        images[25] = (ImageView) findViewById(R.id.z);
+        images[0] = R.drawable.a;
+        images[1] = R.drawable.b;
+        images[2] = R.drawable.c;
+        images[3] = R.drawable.d;
+        images[4] = R.drawable.e;
+        images[5] = R.drawable.f;
+        images[6] = R.drawable.g;
+        images[7] = R.drawable.h;
+        images[8] = R.drawable.i;
+        images[9] = R.drawable.j;
+        images[10] = R.drawable.k;
+        images[11] = R.drawable.l;
+        images[12] = R.drawable.m;
+        images[13] = R.drawable.n;
+        images[14] = R.drawable.o;
+        images[15] = R.drawable.p;
+        images[16] = R.drawable.q;
+        images[17] = R.drawable.r;
+        images[18] = R.drawable.s;
+        images[19] = R.drawable.t;
+        images[20] = R.drawable.u;
+        images[21] = R.drawable.v;
+        images[22] = R.drawable.w;
+        images[23] = R.drawable.x;
+        images[24] = R.drawable.y;
+        images[25] = R.drawable.z;
 
         checkBoxes[0] = (CheckBox) findViewById(R.id.checkBoxA);
         checkBoxes[1] = (CheckBox) findViewById(R.id.checkBoxB);
@@ -92,48 +93,50 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
         bitmaps = new Bitmap[26];
+        for (int i = 0; i < 26; i++)
+            bitmaps[i] = BitmapFactory.decodeResource(getResources(), images[i]);
+        index = new ArrayList<>(26);
+        bitmap = new ArrayList<>(26);
     }
 
     @Override
     public void onClick(View v) {
         v.startAnimation(AnimationUtils.loadAnimation(this, R.anim.clickanim));
-
+        index.clear();
+        bitmap.clear();
         String path = String.valueOf(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES));
         myDir = new File(path);
         myDir.mkdirs();
-        imageIndex = new ImageIndex();
-        for (int i = 0; i < 26; i++) {
-            bitmaps[i] = ((BitmapDrawable) (images[i].getDrawable())).getBitmap();
+        for (int i = 0; i < 26; i++)
             if (checkBoxes[i].isChecked()) {
-                imageIndex.index = i;
-                new SaveImageTask().execute(imageIndex.index);
+                index.add(i);
+                bitmap.add(bitmaps[i]);
             }
-        }
+        if (bitmap.size() > 0)
+            new SaveImageTask().execute();
         for (int i = 0; i < 26; i++)
             if (checkBoxes[i].isChecked())
                 checkBoxes[i].setChecked(false);
     }
 
-    class SaveImageTask extends AsyncTask<Integer, Void, Void> {
+    class SaveImageTask extends AsyncTask<Void, Void, Void> {
 
         @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            fname = "Saved image " + (imageIndex.index + 1) + ".jpg";
-            file = new File(myDir, fname);
-            if (file.exists()) file.delete();
-        }
-
-        @Override
-        protected Void doInBackground(Integer... params) {
-            try {
-                FileOutputStream out = new FileOutputStream(file);
-                bitmaps[params[0]].compress(Bitmap.CompressFormat.JPEG, 100, out);
-                out.flush();
-                out.close();
-                MediaScannerConnection.scanFile(getApplicationContext(), new String[]{file.getPath()}, new String[]{"image/jpeg"}, null);
-            } catch (Exception e) {
-                e.printStackTrace();
+        protected Void doInBackground(Void... params) {
+            for (int i = 0; i < bitmap.size(); i++) {
+                try {
+                    fname = "Saved image " + (index.get(i)) + ".jpg";
+                    file = new File(myDir, fname);
+                    if (file.exists()) file.delete();
+                    FileOutputStream out = new FileOutputStream(file);
+                    bitmap.get(i).compress(Bitmap.CompressFormat.JPEG, 100, out);
+                    out.flush();
+                    out.close();
+                    MediaScannerConnection.
+                            scanFile(getApplicationContext(), new String[]{file.getPath()}, new String[]{"image/jpeg"}, null);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         }

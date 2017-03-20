@@ -7,11 +7,12 @@
     android:layout_margin="2dp"
     tools:context="com.haykabelyan.bubble.MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
-
+        android:layout_centerVertical="true"
+        android:text="Go"
+        android:textAllCaps="false" />
 </RelativeLayout>

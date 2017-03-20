@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.haykabelyan.multiscreenapp_pictures.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
+            android:layout_marginRight="@dimen/_2sdp"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="@dimen/_44sdp"
+            android:layout_height="@dimen/_33sdp"
+            android:layout_marginLeft="@dimen/_1sdp"
+            android:layout_marginRight="@dimen/_1sdp"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ll"
+        android:text="Change picture"
+        android:textSize="@dimen/_18sdp" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_toEndOf="@+id/textView"
+        android:layout_toRightOf="@+id/textView"
+        android:ems="1"
+        android:inputType="number"
+        android:textSize="@dimen/_18sdp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_toEndOf="@+id/editText"
+        android:layout_toRightOf="@+id/editText"
+        android:text="with"
+        android:textSize="@dimen/_18sdp" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="1"
+        android:inputType="number"
+        android:textSize="@dimen/_18sdp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll"
+        android:layout_toEndOf="@+id/editText2"
+        android:layout_toRightOf="@+id/editText2"
+        android:text="Change"
+        android:textAllCaps="false"
+        android:textSize="@dimen/_16sdp" />
+
+</RelativeLayout>
